@@ -7,11 +7,11 @@
     android:padding="20dp">
 
     <TextView
-        android:id="@+id/login_tv_title"
+        android:id="@+id/signUp_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/login_title"
+        android:text="회원가입"
         android:textColor="@color/green"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -20,10 +20,38 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/signUp_tv_id"
+        android:id="@+id/signUp_tv_nickName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:background="@drawable/bg_round_green"
+        android:paddingHorizontal="16dp"
+        android:text="@string/signUp_nickName"
+        android:textColor="@color/green"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signUp_tv_title" />
+
+
+    <EditText
+        android:id="@+id/signUp_et_nickName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_round_green"
+        android:hint="@string/signUp_hint_nickName"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/signUp_tv_nickName"
+        app:layout_constraintTop_toBottomOf="@id/signUp_tv_nickName" />
+
+    <TextView
+        android:id="@+id/signUp_tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:background="@drawable/bg_round_green"
         android:paddingHorizontal="16dp"
         android:text="@string/login_id"
@@ -31,18 +59,18 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/signUp_et_nickName" />
 
 
     <EditText
-        android:id="@+id/singUp_et_id"
+        android:id="@+id/signUp_et_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_round_green"
         android:hint="@string/login_hint_id"
         android:paddingHorizontal="4dp"
-        android:paddingVertical="12dp"
+        android:paddingVertical="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/signUp_tv_id"
         app:layout_constraintTop_toBottomOf="@id/signUp_tv_id" />
@@ -51,7 +79,7 @@
         android:id="@+id/signUp_tv_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/bg_round_green"
         android:paddingHorizontal="16dp"
         android:text="@string/login_pw"
@@ -59,29 +87,49 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/singUp_et_id" />
+        app:layout_constraintTop_toBottomOf="@id/signUp_et_id" />
+
 
     <EditText
-        android:id="@+id/singUp_et_pw"
+        android:id="@+id/signUp_et_pw"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_round_green"
         android:hint="@string/login_hint_pw"
         android:paddingHorizontal="4dp"
-        android:paddingVertical="12dp"
+        android:paddingVertical="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/signUp_tv_pw"
         app:layout_constraintTop_toBottomOf="@id/signUp_tv_pw" />
 
     <TextView
-        android:id="@+id/login_tv_singUp"
+        android:id="@+id/signUp_tv_mbti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/login_sign_up"
-        app:layout_constraintStart_toStartOf="@id/singUp_et_pw"
-        app:layout_constraintTop_toBottomOf="@id/singUp_et_pw" />
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_round_green"
+        android:paddingHorizontal="16dp"
+        android:text="@string/signUp_mbti"
+        android:textColor="@color/green"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signUp_et_pw" />
+
+
+    <EditText
+        android:id="@+id/signUp_et_mbti"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_round_green"
+        android:hint="@string/signUp_hint_mbti"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/signUp_tv_mbti"
+        app:layout_constraintTop_toBottomOf="@id/signUp_tv_mbti" />
 
     <TextView
         android:layout_width="0dp"
@@ -90,7 +138,7 @@
         android:backgroundTint="@color/green"
         android:gravity="center"
         android:paddingVertical="12dp"
-        android:text="@string/login_login"
+        android:text="@string/signUp_button"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
