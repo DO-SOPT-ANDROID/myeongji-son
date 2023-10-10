@@ -6,14 +6,19 @@
     <string name="login_pw">PW</string>
     <string name="login_id">ID</string>
     <string name="login_hint_id">아이디를 입력해주세요</string>
-    <string name="login_hint_pw">비밀번호를 입력해주세요</string>
+    <string name="singUp_hint_pw">비밀번호를 입력해주세요</string>
     <string name="login_login">로그인</string>
-    <string name="login_sign_up">아직 회원이 아니신가요?</string>
+    <string name="login_button">아직 회원이 아니신가요?</string>
 
     <!--회원가입 페이지-->
     <string name="signUp_nickName">NickName</string>
-    <string name="signUp_hint_nickName">닉네임을 입력해주세요</string>
+    <string name="signUp_hint_nickName">닉네임을 입력해주세요(필수)</string>
+    <string name="signUp_hint_id">아이디를 입력해주세요(필수)</string>
+    <string name="signUp_hint_pw">비밀번호를 입력해주세요</string>
     <string name="signUp_mbti">MBTI</string>
     <string name="signUp_hint_mbti">MBTI를 입력해주세요</string>
     <string name="signUp_button">회원가입</string>
+    <string name="signUp_warning_nickName">*닉네임을 필수로 입력해주세요!</string>
+    <string name="signUp_warning_id">*아이디를 필수로 입력해주세요!</string>
+    <string name="signUp_warning_pw">*비밀번호를 필수로 입력해주세요!</string>
 </resources>
