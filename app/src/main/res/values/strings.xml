@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">DoSoptTemplate</string>
+
+    <!-- 회원가입 페이지-->
+    <string name="signIn_title">Welcome to SOPT</string>
+    <string name="signIn_pw">PW</string>
+    <string name="signIn_id">ID</string>
+    <string name="singIn_hint_id">아이디를 입력해주세요</string>
+    <string name="signUp_hint_pw">비밀번호를 입력해주세요</string>
+    <string name="singIn_login">로그인</string>
+    <string name="singIn_sing_up">아직 회원이 아니신가요?</string>
 </resources>
