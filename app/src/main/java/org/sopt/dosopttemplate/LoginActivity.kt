@@ -21,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
         loginTvSingUp.setOnClickListener {
             val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

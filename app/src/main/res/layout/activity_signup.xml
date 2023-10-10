@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:padding="20dp">
+    android:padding="24dp">
 
     <TextView
         android:id="@+id/signUp_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="회원가입"
+        android:text="@string/signUp_title"
         android:textColor="@color/green"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -41,21 +41,10 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_round_green"
         android:hint="@string/signUp_hint_nickName"
-        android:paddingHorizontal="4dp"
-        android:paddingVertical="8dp"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/signUp_tv_nickName"
         app:layout_constraintTop_toBottomOf="@id/signUp_tv_nickName" />
-
-    <TextView
-        android:id="@+id/signUp_tv_warning_nickName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/signUp_warning_nickName"
-        android:textColor="@color/red"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@id/signUp_et_nickName"
-        app:layout_constraintTop_toBottomOf="@id/signUp_et_nickName" />
 
     <TextView
         android:id="@+id/login_tv_id"
@@ -73,27 +62,17 @@
 
 
     <EditText
+
         android:id="@+id/signUp_et_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_round_green"
         android:hint="@string/signUp_hint_id"
-        android:paddingHorizontal="4dp"
-        android:paddingVertical="8dp"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/login_tv_id"
         app:layout_constraintTop_toBottomOf="@id/login_tv_id" />
-
-    <TextView
-        android:id="@+id/signUp_tv_warning_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/signUp_warning_id"
-        android:textColor="@color/red"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@id/signUp_et_id"
-        app:layout_constraintTop_toBottomOf="@id/signUp_et_id" />
 
     <TextView
         android:id="@+id/login_tv_pw"
@@ -117,21 +96,10 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_round_green"
         android:hint="@string/signUp_hint_pw"
-        android:paddingHorizontal="4dp"
-        android:paddingVertical="8dp"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/login_tv_pw"
         app:layout_constraintTop_toBottomOf="@id/login_tv_pw" />
-
-    <TextView
-        android:id="@+id/signUp_tv_warning_pw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/signUp_warning_pw"
-        android:textColor="@color/red"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@id/signUp_et_pw"
-        app:layout_constraintTop_toBottomOf="@id/signUp_et_pw" />
 
     <TextView
         android:id="@+id/signUp_tv_mbti"
@@ -155,13 +123,13 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_round_green"
         android:hint="@string/signUp_hint_mbti"
-        android:paddingHorizontal="4dp"
-        android:paddingVertical="8dp"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/signUp_tv_mbti"
         app:layout_constraintTop_toBottomOf="@id/signUp_tv_mbti" />
 
     <TextView
+        android:id="@+id/signUp_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_round_green"
