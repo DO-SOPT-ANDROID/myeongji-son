@@ -11,15 +11,17 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding
 
-    private lateinit var nickName : String
-    private lateinit var id : String
-    private lateinit var pw : String
-    private lateinit var mbti : String
+    private lateinit var nickName: String
+    private lateinit var id: String
+    private lateinit var pw: String
+    private lateinit var mbti: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         binding.signUpBtn.setOnClickListener {
             updateValues()
@@ -52,7 +54,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun nullCheck(): Boolean {
         if (nickName.isEmpty() || id.isEmpty() || pw.isEmpty() || mbti.isEmpty()) {
-            Log.d("value","${nickName}, ${id}, ${pw}, ${mbti}")
+            Log.d("value", "${nickName}, ${id}, ${pw}, ${mbti}")
             Toast.makeText(this, "모든 정보를 입력해주세요!", Toast.LENGTH_SHORT).show()
             return false
         } else {
@@ -63,9 +65,15 @@ class SignUpActivity : AppCompatActivity() {
     private fun validateAndGoToLogin() {
         if (nullCheck()) {
             if (checkCondition()) {
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
+                val intent = Intent(this, LoginActivity::class.java).apply {
+                    putExtra("nickName", nickName)
+                    putExtra("id", id)
+                    putExtra("password", pw)
+                    putExtra("mbti", mbti)
+                }
+                setResult(RESULT_OK, intent)
                 finish()
+                Toast.makeText(this, "회원가입 성공했습니다", Toast.LENGTH_SHORT).show()
             }
         }
     }
