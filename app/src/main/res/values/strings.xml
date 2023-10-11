@@ -23,4 +23,10 @@
     <string name="signUp_warning_pw">*비밀번호를 필수로 입력해주세요!</string>
     <string name="signUp_warning_mbti">MBTI를 필수로 입력해주세요!</string>
     <string name="signUp_title">회원가입</string>
+
+    <!--메인페이지-->
+    <string name="main_nickName_title">닉네임</string>
+    <string name="main_introduce">안녕하세요 띵지입니다</string>
+    <string name="main_id">ID</string>
+    <string name="main_mbti">MBTI</string>
 </resources>

@@ -21,6 +21,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var id: String
     private lateinit var pw: String
+    private lateinit var nickName : String
+    private lateinit var mbti : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +34,9 @@ class LoginActivity : AppCompatActivity() {
                 if (result.resultCode == Activity.RESULT_OK) {
                     val userData = result.data
                     id = userData?.getStringExtra("id") ?: ""
-                    val nickName = userData?.getStringExtra("nickName") ?: ""
+                    nickName = userData?.getStringExtra("nickName") ?: ""
                     pw = userData?.getStringExtra("password") ?: ""
-                    val mbti = userData?.getStringExtra("mbti") ?: ""
+                    mbti = userData?.getStringExtra("mbti") ?: ""
 
                     Log.d("userData", "${id},${nickName},${pw}, ${mbti}")
                 }
@@ -49,11 +51,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun checkData() {
-        if (loginId == id && loginPw == pw) {
-            goMain()
-            Toast.makeText(this, "로그인에 성공했습니다.", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "아이디 혹은 비밀번호가 잘못 입력됐습니다.", Toast.LENGTH_SHORT).show()
+        if(::id.isInitialized && ::pw.isInitialized) {
+            if (loginId == id && loginPw == pw) {
+                goMain()
+                Toast.makeText(this, "로그인에 성공했습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "아이디 혹은 비밀번호가 잘못 입력됐습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+        else {
+            Toast.makeText(this, "회원가입이 되어있지 않습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -63,7 +70,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goMain() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java).apply {
+            putExtra("nickName", nickName)
+            putExtra("id", id)
+            putExtra("mbti", mbti)
+        }
         startActivity(intent)
         finish()
     }
