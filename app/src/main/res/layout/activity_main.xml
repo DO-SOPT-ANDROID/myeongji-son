@@ -4,15 +4,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
+
+    <ImageView
+        android:id="@+id/main_iv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="36dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/suho"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.25" />
+
     <TextView
+        android:id="@+id/main_tv_nickName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello DO SOPT!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/main_iv"
+        app:layout_constraintStart_toEndOf="@id/main_iv"
+        app:layout_constraintTop_toTopOf="@id/main_iv"
+        tools:text="닉네임" />
 
+    <TextView
+        android:id="@+id/main_tv_user_introduce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/main_tv_nickName"
+        app:layout_constraintStart_toEndOf="@id/main_tv_nickName"
+        app:layout_constraintTop_toTopOf="@id/main_tv_nickName"
+        tools:text="한줄소개" />
+
+    <TextView
+        android:id="@+id/main_tv_id_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="48dp"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_iv"
+        tools:text="ID" />
+
+    <TextView
+        android:id="@+id/main_tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/main_tv_id_title"
+        app:layout_constraintTop_toBottomOf="@+id/main_tv_id_title"
+        tools:text="sonson" />
+
+    <TextView
+        android:id="@+id/main_tv_mbti_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/main_tv_id"
+        app:layout_constraintTop_toBottomOf="@id/main_tv_id"
+        tools:text="MBTI" />
+
+    <TextView
+        android:id="@+id/main_tv_mbti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/main_tv_mbti_title"
+        app:layout_constraintTop_toBottomOf="@id/main_tv_mbti_title"
+        tools:text="ISFP" />
 </androidx.constraintlayout.widget.ConstraintLayout>
