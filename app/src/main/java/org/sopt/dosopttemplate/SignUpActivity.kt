@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
 
 class SignUpActivity : AppCompatActivity() {
@@ -55,7 +56,11 @@ class SignUpActivity : AppCompatActivity() {
     private fun nullCheck(): Boolean {
         if (nickName.isEmpty() || id.isEmpty() || pw.isEmpty() || mbti.isEmpty()) {
             Log.d("value", "${nickName}, ${id}, ${pw}, ${mbti}")
-            Toast.makeText(this, "모든 정보를 입력해주세요!", Toast.LENGTH_SHORT).show()
+            Snackbar.make(
+                binding.root,
+                "모든 항목을 작성해주세요",
+                Snackbar.LENGTH_SHORT
+            ).show()
             return false
         } else {
             return true
