@@ -29,11 +29,11 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateValues() {
-        nickName = binding.signUpEtNickName.text.toString()
-        id = binding.signUpEtId.text.toString()
-        pw = binding.signUpEtPw.text.toString()
-        mbti = binding.signUpEtMbti.text.toString()
+    private fun updateValues() = with(binding) {
+        nickName = signUpEtNickName.text.toString()
+        id = signUpEtId.text.toString()
+        pw = signUpEtPw.text.toString()
+        mbti = signUpEtMbti.text.toString()
     }
 
     private fun checkCondition(): Boolean {
