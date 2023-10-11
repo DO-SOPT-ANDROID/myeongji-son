@@ -51,6 +51,7 @@ class LoginActivity : AppCompatActivity() {
     private fun checkData() {
         if (loginId == id && loginPw == pw) {
             goMain()
+            Toast.makeText(this, "로그인에 성공했습니다.", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "아이디 혹은 비밀번호가 잘못 입력됐습니다.", Toast.LENGTH_SHORT).show()
         }
@@ -71,7 +72,6 @@ class LoginActivity : AppCompatActivity() {
         loginTvSingUp.setOnClickListener {
             val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
             resultLauncher.launch(intent)
-            Toast.makeText(this, "로그인에 성공했습니다", Toast.LENGTH_SHORT).show()
         }
     }
 }
