@@ -1,12 +1,13 @@
-package org.sopt.dosopttemplate
+package org.sopt.dosopttemplate.presentation.signup
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
+import org.sopt.dosopttemplate.presentation.login.LoginActivity
+import org.sopt.dosopttemplate.util.showToast
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -21,8 +22,6 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
 
         binding.signUpBtn.setOnClickListener {
             updateValues()
@@ -78,7 +77,7 @@ class SignUpActivity : AppCompatActivity() {
                 }
                 setResult(RESULT_OK, intent)
                 finish()
-                Toast.makeText(this, "회원가입 성공했습니다", Toast.LENGTH_SHORT).show()
+                showToast("회원가입 성공했습니다")
             }
         }
     }

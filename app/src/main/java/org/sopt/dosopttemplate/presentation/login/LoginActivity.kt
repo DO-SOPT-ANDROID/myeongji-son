@@ -1,14 +1,15 @@
-package org.sopt.dosopttemplate
+package org.sopt.dosopttemplate.presentation.login
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
+import org.sopt.dosopttemplate.presentation.main.MainActivity
+import org.sopt.dosopttemplate.presentation.signup.SignUpActivity
+import org.sopt.dosopttemplate.util.showToast
 
 class LoginActivity : AppCompatActivity() {
 
@@ -45,8 +46,6 @@ class LoginActivity : AppCompatActivity() {
                     nickName = userData?.getStringExtra("nickName") ?: ""
                     pw = userData?.getStringExtra("password") ?: ""
                     mbti = userData?.getStringExtra("mbti") ?: ""
-
-                    Log.d("userData", "${id},${nickName},${pw}, ${mbti}")
                 }
             }
     }
@@ -62,13 +61,13 @@ class LoginActivity : AppCompatActivity() {
         if(::id.isInitialized && ::pw.isInitialized) {
             if (loginId == id && loginPw == pw) {
                 startMainActivity()
-                Toast.makeText(this, "로그인에 성공했습니다.", Toast.LENGTH_SHORT).show()
+                showToast("로그인에 성공했습니다.")
             } else {
-                Toast.makeText(this, "아이디 혹은 비밀번호가 잘못 입력됐습니다.", Toast.LENGTH_SHORT).show()
+                showToast("아이디 혹은 비밀번호가 잘못 입력됐습니다.")
             }
         }
         else {
-            Toast.makeText(this, "회원가입이 되어있지 않습니다.", Toast.LENGTH_SHORT).show()
+            showToast("회원가입이 되어있지 않습니다.")
         }
     }
 

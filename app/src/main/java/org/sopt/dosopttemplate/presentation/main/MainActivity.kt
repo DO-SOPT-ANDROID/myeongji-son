@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate
+package org.sopt.dosopttemplate.presentation.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         showData()
-
     }
 
     private fun showData() = with(binding) {
