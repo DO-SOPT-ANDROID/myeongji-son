@@ -29,6 +29,14 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        getUserDataFromSignUp()
+
+        clickLoginBtn()
+
+        initSignUpBtnClickListener()
+    }
+
+    private fun getUserDataFromSignUp() {
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
@@ -41,19 +49,19 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("userData", "${id},${nickName},${pw}, ${mbti}")
                 }
             }
+    }
 
+    private fun clickLoginBtn() {
         binding.loginButton.setOnClickListener {
             updateValues()
             checkData()
         }
-
-        goSignUp()
     }
 
     private fun checkData() {
         if(::id.isInitialized && ::pw.isInitialized) {
             if (loginId == id && loginPw == pw) {
-                goMain()
+                startMainActivity()
                 Toast.makeText(this, "로그인에 성공했습니다.", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "아이디 혹은 비밀번호가 잘못 입력됐습니다.", Toast.LENGTH_SHORT).show()
@@ -69,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
         loginPw = binding.loginEtPw.text.toString()
     }
 
-    private fun goMain() {
+    private fun startMainActivity() {
         val intent = Intent(this, MainActivity::class.java).apply {
             putExtra("nickName", nickName)
             putExtra("id", id)
@@ -79,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun goSignUp() = with(binding) {
+    private fun initSignUpBtnClickListener() = with(binding) {
         loginTvSingUp.setOnClickListener {
             val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
             resultLauncher.launch(intent)
