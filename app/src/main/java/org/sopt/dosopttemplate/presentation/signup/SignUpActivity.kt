@@ -23,7 +23,11 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.signUpBtn.setOnClickListener {
+        clickSignUpBtn()
+    }
+
+    private fun clickSignUpBtn() = with(binding) {
+        signUpBtn.setOnClickListener {
             updateValues()
             validateAndGoToLogin()
         }
@@ -37,16 +41,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun checkCondition(): Boolean {
-        if (nickName.isBlank()) {
-            return false
-        }
-        if (id.length !in 6..10) {
-            return false
-        }
-        if (pw.length !in 8..12) {
-            return false
-        }
-        if (mbti.length != 4) {
+        if (nickName.isBlank() && id.length !in 6..10 && pw.length !in 8..12 && mbti.length != 4) {
             return false
         }
         return true

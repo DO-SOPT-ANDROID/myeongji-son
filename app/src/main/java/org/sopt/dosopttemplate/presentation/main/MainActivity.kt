@@ -12,10 +12,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        showData()
+        initData()
     }
 
-    private fun showData() = with(binding) {
+    private fun initData() = with(binding) {
         val nickName = intent.getStringExtra("nickName")
         val id = intent.getStringExtra("id")
         val mbti = intent.getStringExtra("mbti")
