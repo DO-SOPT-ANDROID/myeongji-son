@@ -57,6 +57,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateValues() = with(binding) {
+        loginId = loginEtId.text.toString()
+        loginPw = binding.loginEtPw.text.toString()
+    }
+
     private fun checkData() {
         if(::id.isInitialized && ::pw.isInitialized) {
             if (loginId == id && loginPw == pw) {
@@ -69,11 +74,6 @@ class LoginActivity : AppCompatActivity() {
         else {
             showToast("회원가입이 되어있지 않습니다.")
         }
-    }
-
-    private fun updateValues() = with(binding) {
-        loginId = loginEtId.text.toString()
-        loginPw = binding.loginEtPw.text.toString()
     }
 
     private fun startMainActivity() {
