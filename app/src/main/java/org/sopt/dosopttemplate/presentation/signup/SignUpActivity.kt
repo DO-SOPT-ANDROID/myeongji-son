@@ -2,9 +2,7 @@ package org.sopt.dosopttemplate.presentation.signup
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
 import org.sopt.dosopttemplate.presentation.login.LoginActivity
 import org.sopt.dosopttemplate.util.showSnackBar
@@ -50,7 +48,6 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun nullCheck(): Boolean {
         if (nickName.isEmpty() || id.isEmpty() || pw.isEmpty() || mbti.isEmpty()) {
-            Log.d("value", "${nickName}, ${id}, ${pw}, ${mbti}")
             binding.root.showSnackBar("모든 항목을 작성해주세요")
             return false
         } else {

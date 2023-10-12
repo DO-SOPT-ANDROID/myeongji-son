@@ -21,7 +21,7 @@
     <string name="signUp_warning_nickName">*닉네임을 필수로 입력해주세요!</string>
     <string name="signUp_warning_id">*아이디를 필수로 입력해주세요!</string>
     <string name="signUp_warning_pw">*비밀번호를 필수로 입력해주세요!</string>
-    <string name="signUp_warning_mbti">MBTI를 필수로 입력해주세요!</string>
+    <string name="signUp_warning_mbti">*MBTI를 필수로 입력해주세요!</string>
     <string name="signUp_title">회원가입</string>
 
     <!--메인페이지-->
