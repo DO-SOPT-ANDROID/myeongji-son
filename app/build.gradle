@@ -7,6 +7,10 @@ android {
     namespace 'org.sopt.dosopttemplate'
     compileSdk 33
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId "org.sopt.dosopttemplate"
         minSdk 28
