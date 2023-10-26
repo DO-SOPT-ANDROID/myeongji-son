@@ -8,7 +8,7 @@ import org.sopt.dosopttemplate.data.MyProfile
 import org.sopt.dosopttemplate.databinding.ItemMyProfileBinding
 import org.sopt.dosopttemplate.presentation.home.viewholder.MyProfileViewHolder
 
-class ProfileAdapter(context: Context) : RecyclerView.Adapter<MyProfileViewHolder>() {
+class MyProfileAdapter(context: Context) : RecyclerView.Adapter<MyProfileViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
 
     private var myProfile: List<MyProfile> = emptyList()
@@ -18,7 +18,7 @@ class ProfileAdapter(context: Context) : RecyclerView.Adapter<MyProfileViewHolde
         return MyProfileViewHolder(binding)
     }
 
-    override fun getItemCount() = if (myProfile != null) 1 else 0
+    override fun getItemCount() = 1
 
     override fun onBindViewHolder(holder: MyProfileViewHolder, position: Int) {
         holder.onBind(myProfile[position])
