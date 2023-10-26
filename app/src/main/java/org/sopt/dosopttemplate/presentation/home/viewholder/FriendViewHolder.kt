@@ -9,5 +9,6 @@ class FriendViewHolder(private val binding: ItemFriendListBinding) :
     fun onBind(friendData: FriendList) {
         binding.friendRVIvProfile.setImageResource(friendData.profileImage)
         binding.friendRVTvName.text = friendData.name
+        binding.friendRVTvStatusMessage.text = friendData.statusMessage
     }
 }
