@@ -13,7 +13,9 @@ class HomeFragment : Fragment() {
         get() = requireNotNull(_binding) { "바인딩 객체가 생성되지 않음" }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root

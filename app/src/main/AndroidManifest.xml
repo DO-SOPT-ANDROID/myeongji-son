@@ -17,6 +17,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".presentation.HomeActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".presentation.login.LoginActivity"
             android:exported="true">
 
