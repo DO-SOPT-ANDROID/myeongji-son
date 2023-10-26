@@ -9,6 +9,6 @@
     <style name="Theme.bottomNavigationViewStyle" parent="Widget.Material3.BottomNavigationView">
         <item name="itemIconTint">@color/white</item>
         <item name="itemTextColor">@color/black</item>
-        <item name="android:background">@color/gray</item>
+        <item name="android:background">@color/green</item>
     </style>
 </resources>
