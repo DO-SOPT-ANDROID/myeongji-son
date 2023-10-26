@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ConcatAdapter
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.data.FriendList
+import org.sopt.dosopttemplate.data.MyProfile
 import org.sopt.dosopttemplate.databinding.FragmentHomeBinding
 import org.sopt.dosopttemplate.presentation.home.adapter.FriendAdapter
+import org.sopt.dosopttemplate.presentation.home.adapter.ProfileAdapter
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -65,9 +68,20 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val friendAdapter = FriendAdapter(requireContext())
-        binding.rvFriend.adapter = friendAdapter
-        friendAdapter.setFriendList(mockFriendList)
+        val profileData = MyProfile(
+            profileImage = R.drawable.img_suho,
+            name = "손수호",
+        )
+        val profileAdapter = ProfileAdapter(requireContext()).apply {
+            setMyProfile(profileData)
+        }
+
+        val friendAdapter = FriendAdapter(requireContext()).apply {
+            setFriendList(mockFriendList)
+        }
+
+        val concatAdapter = ConcatAdapter(profileAdapter, friendAdapter)
+        binding.rvFriend.adapter = concatAdapter
     }
 
     override fun onDestroyView() {
