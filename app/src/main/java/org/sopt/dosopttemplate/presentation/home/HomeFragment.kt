@@ -5,24 +5,57 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import org.sopt.dosopttemplate.R
+import org.sopt.dosopttemplate.data.FriendList
 import org.sopt.dosopttemplate.databinding.FragmentHomeBinding
+import org.sopt.dosopttemplate.presentation.home.adapter.FriendAdapter
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding
         get() = requireNotNull(_binding) { "바인딩 객체가 생성되지 않음" }
 
+    private val mockFriendList = listOf(
+        FriendList(
+            profileImage = R.drawable.img_cat,
+            name = "김고양",
+        ),
+        FriendList(
+            profileImage = R.drawable.img_dog,
+            name = "박강쥐",
+        ),
+        FriendList(
+            profileImage = R.drawable.img_otter,
+            name = "이해달",
+        ),
+        FriendList(
+            profileImage = R.drawable.img_penguin,
+            name = "최펭귄",
+        ),
+        FriendList(
+            profileImage = R.drawable.img_red_panda,
+            name = "정판다",
+        ),
+        FriendList(
+            profileImage = R.drawable.img_rabbit,
+            name = "손토끼",
+        ),
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val friendAdapter = FriendAdapter(requireContext())
+        binding.rvFriend.adapter = friendAdapter
+        friendAdapter.setFriendList(mockFriendList)
     }
 
     override fun onDestroyView() {
