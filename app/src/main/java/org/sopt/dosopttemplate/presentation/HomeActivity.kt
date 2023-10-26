@@ -24,7 +24,8 @@ class HomeActivity : AppCompatActivity() {
     private fun addHomeFragment() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_home)
         if (currentFragment == null) {
-            supportFragmentManager.beginTransaction().add(R.id.fcv_home, DoAndroidFragment()).commit()
+            supportFragmentManager.beginTransaction().add(R.id.fcv_home, DoAndroidFragment())
+                .commit()
         }
     }
 
