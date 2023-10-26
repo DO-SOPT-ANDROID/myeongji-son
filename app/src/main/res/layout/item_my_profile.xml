@@ -2,14 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:paddingVertical="20dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/white"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="20dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/home_iv_my_profile"
         android:layout_width="68dp"
         android:layout_height="0dp"
-        android:layout_marginStart="20dp"
         android:scaleType="centerCrop"
         android:src="@drawable/img_suho"
         app:layout_constraintDimensionRatio="1"
@@ -28,5 +29,21 @@
         app:layout_constraintBottom_toBottomOf="@id/home_iv_my_profile"
         app:layout_constraintStart_toEndOf="@id/home_iv_my_profile"
         app:layout_constraintTop_toTopOf="@id/home_iv_my_profile" />
+
+    <TextView
+        android:id="@+id/home_btn_status_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_gray"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="4dp"
+        android:text="@string/home_btn_status_message"
+        android:textColor="@color/black"
+        app:drawableRightCompat="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="@+id/home_tv_my_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/home_tv_my_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
