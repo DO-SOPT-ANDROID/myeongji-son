@@ -1,10 +1,10 @@
-package org.sopt.dosopttemplate.presentation.main
+package org.sopt.dosopttemplate.presentation.mypage
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import org.sopt.dosopttemplate.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MyPageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {

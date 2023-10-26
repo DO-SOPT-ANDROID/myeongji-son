@@ -7,7 +7,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
-import org.sopt.dosopttemplate.presentation.main.MainActivity
+import org.sopt.dosopttemplate.presentation.mypage.MyPageActivity
 import org.sopt.dosopttemplate.presentation.signup.SignUpActivity
 import org.sopt.dosopttemplate.util.showToast
 
@@ -77,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun startMainActivity() {
-        val intent = Intent(this, MainActivity::class.java).apply {
+        val intent = Intent(this, MyPageActivity::class.java).apply {
             putExtra("nickName", nickName)
             putExtra("id", id)
             putExtra("mbti", mbti)
