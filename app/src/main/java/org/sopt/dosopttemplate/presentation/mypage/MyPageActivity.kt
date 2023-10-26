@@ -2,7 +2,6 @@ package org.sopt.dosopttemplate.presentation.mypage
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import org.sopt.dosopttemplate.databinding.ActivityMainBinding
 import org.sopt.dosopttemplate.databinding.ActivityMyPageBinding
 
 class MyPageActivity : AppCompatActivity() {
