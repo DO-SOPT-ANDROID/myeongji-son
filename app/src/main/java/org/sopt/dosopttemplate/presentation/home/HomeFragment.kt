@@ -40,6 +40,18 @@ class HomeFragment : Fragment() {
             profileImage = R.drawable.img_rabbit,
             name = "손토끼",
         ),
+        FriendList(
+            profileImage = R.drawable.img_squirrel,
+            name = "지다람",
+        ),
+        FriendList(
+            profileImage = R.drawable.img_lion,
+            name = "나심바",
+        ),
+        FriendList(
+            profileImage = R.drawable.img_mouse,
+            name = "나따뚜이",
+        ),
     )
 
     override fun onCreateView(
