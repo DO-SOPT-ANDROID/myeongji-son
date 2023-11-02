@@ -18,7 +18,7 @@ class MyProfileAdapter(context: Context) : RecyclerView.Adapter<MyProfileViewHol
         return MyProfileViewHolder(binding)
     }
 
-    override fun getItemCount() = 1
+    override fun getItemCount() = MY_PROFILE_COUNT
 
     override fun onBindViewHolder(holder: MyProfileViewHolder, position: Int) {
         holder.onBind(myProfile[position])
@@ -27,5 +27,9 @@ class MyProfileAdapter(context: Context) : RecyclerView.Adapter<MyProfileViewHol
     fun setMyProfile(myProfile: MyProfile) {
         this.myProfile = listOf(myProfile)
         notifyDataSetChanged()
+    }
+
+    companion object {
+        const val MY_PROFILE_COUNT = 1
     }
 }
