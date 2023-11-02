@@ -31,6 +31,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initAdapter()
+    }
+
+    private fun initAdapter() {
         val myProfileAdapter = MyProfileAdapter(requireContext()).apply {
             setMyProfile(viewModel.profileData)
         }
