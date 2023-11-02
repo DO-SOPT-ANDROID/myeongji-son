@@ -4,28 +4,28 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.sopt.dosopttemplate.data.FriendList
+import org.sopt.dosopttemplate.data.Friend
 import org.sopt.dosopttemplate.databinding.ItemFriendListBinding
 import org.sopt.dosopttemplate.presentation.home.viewholder.FriendViewHolder
 
 class FriendAdapter(context: Context) : RecyclerView.Adapter<FriendViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
 
-    private var friendList: List<FriendList> = emptyList()
+    private var friend: List<Friend> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendViewHolder {
         val binding = ItemFriendListBinding.inflate(inflater, parent, false)
         return FriendViewHolder(binding)
     }
 
-    override fun getItemCount() = friendList.size
+    override fun getItemCount() = friend.size
 
     override fun onBindViewHolder(holder: FriendViewHolder, position: Int) {
-        holder.onBind(friendList[position])
+        holder.onBind(friend[position])
     }
 
-    fun setFriendList(friendList: List<FriendList>) {
-        this.friendList = friendList.toList()
+    fun setFriendList(friend: List<Friend>) {
+        this.friend = friend.toList()
         notifyDataSetChanged()
     }
 }

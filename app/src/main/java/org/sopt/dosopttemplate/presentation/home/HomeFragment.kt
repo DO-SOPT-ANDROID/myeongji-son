@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
         }
 
         val friendAdapter = FriendAdapter(requireContext()).apply {
-            setFriendList(viewModel.mockFriendList)
+            setFriendList(viewModel.mockFriends)
         }
 
         val concatAdapter = ConcatAdapter(myProfileAdapter, friendAdapter)
