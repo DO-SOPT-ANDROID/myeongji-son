@@ -35,6 +35,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_container_id"
+        style="@style/TextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/login_hint_id"
@@ -68,7 +69,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_container_pw"
-        android:layout_width="0dp"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/singUp_hint_pw"
         android:inputType="textPassword"
