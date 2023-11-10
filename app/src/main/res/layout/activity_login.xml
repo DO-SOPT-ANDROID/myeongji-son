@@ -33,19 +33,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_tv_title" />
 
-
-    <EditText
-        android:id="@+id/login_et_id"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_container_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_round_green"
         android:hint="@string/login_hint_id"
         android:paddingHorizontal="4dp"
         android:paddingVertical="12dp"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/login_tv_id"
-        app:layout_constraintTop_toBottomOf="@id/login_tv_id" />
+        app:layout_constraintTop_toBottomOf="@id/login_tv_id">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_et_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/login_tv_pw"
@@ -59,21 +64,27 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_et_id" />
+        app:layout_constraintTop_toBottomOf="@id/login_container_id" />
 
-    <EditText
-        android:id="@+id/login_et_pw"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_container_pw"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_round_green"
         android:hint="@string/singUp_hint_pw"
         android:inputType="textPassword"
         android:paddingHorizontal="4dp"
         android:paddingVertical="12dp"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/login_tv_pw"
-        app:layout_constraintTop_toBottomOf="@id/login_tv_pw" />
+        app:layout_constraintTop_toBottomOf="@id/login_tv_pw">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_et_pw"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/login_tv_singUp"
@@ -83,8 +94,8 @@
         android:paddingHorizontal="4dp"
         android:paddingVertical="16dp"
         android:text="@string/login_button"
-        app:layout_constraintStart_toStartOf="@id/login_et_pw"
-        app:layout_constraintTop_toBottomOf="@id/login_et_pw" />
+        app:layout_constraintStart_toStartOf="@id/login_container_pw"
+        app:layout_constraintTop_toBottomOf="@id/login_container_pw" />
 
     <TextView
         android:id="@+id/login_button"
@@ -101,6 +112,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

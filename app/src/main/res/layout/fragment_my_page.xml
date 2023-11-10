@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".presentation.main.MainActivity">
+    tools:context=".presentation.mypage.MyPageFragment">
 
 
     <ImageView
@@ -15,7 +15,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/suho"
+        android:src="@drawable/img_suho"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
