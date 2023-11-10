@@ -118,35 +118,3 @@ class SignUpActivity : AppCompatActivity() {
         const val MBTI_VALUE = 4
     }
 }
-
-// 추후에 추가할 ... 코드
-//    private fun observeData() = with(binding) {
-//        viewModel.nickName.observe(this@SignUpActivity) { value ->
-//            if (value.isBlank()) {
-//                binding.signUpLyNickName.error = getString(R.string.signUp_warning_nickName)
-//            } else {
-//                binding.signUpLyNickName.error = null
-//            }
-//        }
-//        viewModel.id.observe(this@SignUpActivity) { value ->
-//            if (value.length !in 6..10) {
-//                binding.signUpLyId.error = getString(R.string.signUp_warning_id)
-//            } else {
-//                binding.signUpLyId.error = null
-//            }
-//        }
-//        viewModel.pw.observe(this@SignUpActivity) { value ->
-//            if (value.length !in 8..10) {
-//                binding.signUpLyPw.error = getString(R.string.signUp_warning_pw)
-//            } else {
-//                binding.signUpLyPw.error = null
-//            }
-//        }
-//        viewModel.mbti.observe(this@SignUpActivity) { value ->
-//            if (value.length != 4) {
-//                binding.signUpLyMbti.error = getString(R.string.signUp_warning_mbti)
-//            } else {
-//                binding.signUpLyMbti.error = null
-//            }
-//        }
-//    }
