@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:padding="24dp">
+    android:padding="12dp">
 
     <TextView
         android:id="@+id/signUp_tv_title"
@@ -23,7 +23,7 @@
         android:id="@+id/signUp_tv_nickName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/bg_round_green"
         android:paddingHorizontal="16dp"
         android:text="@string/signUp_nickName"
@@ -33,23 +33,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signUp_tv_title" />
 
-    <EditText
-        android:id="@+id/signUp_et_nickName"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signUp_ly_nickName"
+        style="@style/TextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_round_green"
         android:hint="@string/signUp_hint_nickName"
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/signUp_tv_nickName"
-        app:layout_constraintTop_toBottomOf="@id/signUp_tv_nickName" />
+        app:layout_constraintTop_toBottomOf="@id/signUp_tv_nickName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/signUp_et_nickName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/login_tv_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_round_green"
         android:paddingHorizontal="16dp"
         android:text="@string/login_id"
@@ -57,27 +63,31 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signUp_et_nickName" />
+        app:layout_constraintTop_toBottomOf="@id/signUp_ly_nickName" />
 
 
-    <EditText
-
-        android:id="@+id/signUp_et_id"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signUp_ly_id"
+        style="@style/TextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_round_green"
         android:hint="@string/signUp_hint_id"
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/login_tv_id"
-        app:layout_constraintTop_toBottomOf="@id/login_tv_id" />
+        app:layout_constraintTop_toBottomOf="@id/login_tv_id">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/signUp_et_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/login_tv_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_round_green"
         android:paddingHorizontal="16dp"
         android:text="@string/login_pw"
@@ -85,26 +95,31 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signUp_et_id" />
+        app:layout_constraintTop_toBottomOf="@id/signUp_ly_id" />
 
 
-    <EditText
-        android:id="@+id/signUp_et_pw"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signUp_ly_pw"
+        style="@style/TextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_round_green"
         android:hint="@string/signUp_hint_pw"
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/login_tv_pw"
-        app:layout_constraintTop_toBottomOf="@id/login_tv_pw" />
+        app:layout_constraintTop_toBottomOf="@id/login_tv_pw">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/signUp_et_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/signUp_tv_mbti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_round_green"
         android:paddingHorizontal="16dp"
         android:text="@string/signUp_mbti"
@@ -112,20 +127,25 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signUp_et_pw" />
+        app:layout_constraintTop_toBottomOf="@id/signUp_ly_pw" />
 
 
-    <EditText
-        android:id="@+id/signUp_et_mbti"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signUp_ly_mbti"
+        style="@style/TextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_round_green"
         android:hint="@string/signUp_hint_mbti"
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/signUp_tv_mbti"
-        app:layout_constraintTop_toBottomOf="@id/signUp_tv_mbti" />
+        app:layout_constraintTop_toBottomOf="@id/signUp_tv_mbti">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/signUp_et_mbti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/signUp_btn"
