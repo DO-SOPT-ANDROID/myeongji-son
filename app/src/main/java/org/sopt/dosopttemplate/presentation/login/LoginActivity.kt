@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
 import org.sopt.dosopttemplate.presentation.HomeActivity
 import org.sopt.dosopttemplate.presentation.signup.SignUpActivity
@@ -67,12 +68,12 @@ class LoginActivity : AppCompatActivity() {
         if (::id.isInitialized && ::pw.isInitialized) {
             if (loginId == id && loginPw == pw) {
                 startMainActivity()
-                showToast("로그인에 성공했습니다.")
+                showToast(getString(R.string.login_complete))
             } else {
-                showToast("아이디 혹은 비밀번호가 잘못 입력됐습니다.")
+                showToast(getString(R.string.login_wrong))
             }
         } else {
-            showToast("회원가입이 되어있지 않습니다.")
+            showToast(getString(R.string.login_not_signUp))
         }
     }
 

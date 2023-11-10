@@ -107,7 +107,7 @@ class SignUpActivity : AppCompatActivity() {
         }
         setResult(RESULT_OK, intent)
         finish()
-        showToast(getString(R.string.signUp_compleate))
+        showToast(getString(R.string.signUp_complete))
     }
 
     companion object {
