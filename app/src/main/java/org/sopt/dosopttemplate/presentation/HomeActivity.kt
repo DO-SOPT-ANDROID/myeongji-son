@@ -29,25 +29,27 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun clickBottomNavigation() = with(binding) {
-        bnvHome.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.menu_home -> {
-                    replaceFragment(HomeFragment())
-                    true
-                }
+    private fun clickBottomNavigation() {
+        with(binding) {
+            bnvHome.setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.menu_home -> {
+                        replaceFragment(HomeFragment())
+                        true
+                    }
 
-                R.id.menu_do_android -> {
-                    replaceFragment(DoAndroidFragment())
-                    true
-                }
+                    R.id.menu_do_android -> {
+                        replaceFragment(DoAndroidFragment())
+                        true
+                    }
 
-                R.id.menu_my_page -> {
-                    replaceFragment(MyPageFragment())
-                    true
-                }
+                    R.id.menu_my_page -> {
+                        replaceFragment(MyPageFragment())
+                        true
+                    }
 
-                else -> false
+                    else -> false
+                }
             }
         }
     }
