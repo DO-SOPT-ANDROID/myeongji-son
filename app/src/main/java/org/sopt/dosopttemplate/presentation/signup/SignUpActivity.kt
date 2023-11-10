@@ -40,7 +40,7 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.signUpEtId.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if ((s == null) || (s.length !in (6..10))) {
+                if ((s == null) || (s.length !in (ID_MIN_VALUE..ID_MAX_VALUE))) {
                     signUpLyId.error = getString(R.string.signUp_warning_id)
                 } else {
                     signUpLyId.error = null
@@ -53,7 +53,7 @@ class SignUpActivity : AppCompatActivity() {
 
         signUpEtPw.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if ((s == null) || (s.length !in (8..10))) {
+                if ((s == null) || (s.length !in (PW_MIN_VALUE..PW_MAX_VALUE))) {
                     signUpLyPw.error = getString(R.string.signUp_warning_pw)
                 } else {
                     signUpLyPw.error = null
@@ -66,7 +66,7 @@ class SignUpActivity : AppCompatActivity() {
 
         signUpEtMbti.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if ((s == null) || (s.length != 4)) {
+                if ((s == null) || (s.length != MBTI_VALUE)) {
                     signUpLyMbti.error = getString(R.string.signUp_warning_mbti)
                 } else {
                     signUpLyMbti.error = null
@@ -108,6 +108,14 @@ class SignUpActivity : AppCompatActivity() {
         setResult(RESULT_OK, intent)
         finish()
         showToast(getString(R.string.signUp_compleate))
+    }
+
+    companion object {
+        const val ID_MIN_VALUE = 6
+        const val ID_MAX_VALUE = 10
+        const val PW_MIN_VALUE = 8
+        const val PW_MAX_VALUE = 10
+        const val MBTI_VALUE = 4
     }
 }
 
