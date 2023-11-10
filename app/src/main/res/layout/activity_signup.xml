@@ -48,7 +48,6 @@
             android:id="@+id/signUp_et_nickName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -64,7 +63,6 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signUp_ly_nickName" />
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signUp_ly_id"
@@ -97,7 +95,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signUp_ly_id" />
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signUp_ly_pw"
         style="@style/TextInputLayoutStyle"
@@ -128,7 +125,6 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signUp_ly_pw" />
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signUp_ly_mbti"
@@ -162,6 +158,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
