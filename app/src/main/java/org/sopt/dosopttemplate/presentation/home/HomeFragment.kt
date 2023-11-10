@@ -18,6 +18,8 @@ class HomeFragment : Fragment() {
         get() = requireNotNull(_binding) { "바인딩 객체가 생성되지 않음" }
 
     private val viewModel: HomeViewModel by viewModels()
+    private var myProfileAdapter: MyProfileAdapter? = null
+    private var friendAdapter: FriendAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,11 +37,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        val myProfileAdapter = MyProfileAdapter(requireContext()).apply {
+        myProfileAdapter = MyProfileAdapter(requireContext()).apply {
             setMyProfile(viewModel.profileData)
         }
 
-        val friendAdapter = FriendAdapter(requireContext()).apply {
+        friendAdapter = FriendAdapter(requireContext()).apply {
             setFriendList(viewModel.mockFriends)
         }
 
@@ -48,6 +50,9 @@ class HomeFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.rvFriend.adapter = null
+        myProfileAdapter = null
+        friendAdapter = null
         _binding = null
         super.onDestroyView()
     }
