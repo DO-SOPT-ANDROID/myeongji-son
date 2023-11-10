@@ -2,12 +2,13 @@ package org.sopt.dosopttemplate.presentation.signup
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
 import org.sopt.dosopttemplate.presentation.login.LoginActivity
-import org.sopt.dosopttemplate.util.showSnackBar
 import org.sopt.dosopttemplate.util.showToast
 
 class SignUpActivity : AppCompatActivity() {
@@ -19,23 +20,62 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        observeData()
+        setUpTextWatchers()
         clickSignUpBtn()
     }
 
-    private fun observeData() = with(binding) {
-        viewModel.nickName.observe(this@SignUpActivity) { value ->
-            signUpEtNickName.setText(value)
-        }
-        viewModel.id.observe(this@SignUpActivity) { value ->
-            signUpEtId.setText(value)
-        }
-        viewModel.pw.observe(this@SignUpActivity) { value ->
-            signUpEtPw.setText(value)
-        }
-        viewModel.mbti.observe(this@SignUpActivity) { value ->
-            signUpEtMbti.setText(value)
-        }
+    private fun setUpTextWatchers() = with(binding) {
+        signUpEtNickName.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (s.isNullOrBlank()) {
+                    signUpLyNickName.error = getString(R.string.signUp_warning_nickName)
+                } else {
+                    signUpLyNickName.error = null
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        binding.signUpEtId.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if ((s == null) || (s.length !in (6..10))) {
+                    signUpLyId.error = getString(R.string.signUp_warning_id)
+                } else {
+                    signUpLyId.error = null
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        signUpEtPw.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if ((s == null) || (s.length !in (8..10))) {
+                    signUpLyPw.error = getString(R.string.signUp_warning_pw)
+                } else {
+                    signUpLyPw.error = null
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        signUpEtMbti.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if ((s == null) || (s.length != 4)) {
+                    signUpLyMbti.error = getString(R.string.signUp_warning_mbti)
+                } else {
+                    signUpLyMbti.error = null
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 
     private fun clickSignUpBtn() = with(binding) {
@@ -53,58 +93,52 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun validateInformation() = with(binding) {
-        val nickName = viewModel.nickName.value
-        val id = viewModel.id.value
-        val pw = viewModel.pw.value
-        val mbti = viewModel.mbti.value
-
-        if (nullCheck(nickName, id, pw, mbti)) {
-            var isValid = true
-
-            if (nickName?.isBlank() == true) {
-                signUpLyNickName.error = getString(R.string.signUp_warning_nickName)
-                isValid = false
-            }
-
-            if (id?.length !in 6..10) {
-                signUpLyId.error = getString(R.string.signUp_warning_id)
-                isValid = false
-            }
-
-            if (pw?.length !in 8..10) {
-                signUpLyPw.error = getString(R.string.signUp_warning_pw)
-                isValid = false
-            }
-
-            if (mbti?.length != 4) {
-                signUpLyMbti.error = getString(R.string.signUp_warning_mbti)
-                isValid = false
-            }
-
-            if (isValid) {
-                navigateToLogin(nickName, id, pw, mbti)
-            }
+        if (signUpLyNickName.error == null && signUpLyId.error == null && signUpLyPw.error == null && signUpLyMbti.error == null) {
+            navigateToLogin()
         }
     }
 
-    private fun nullCheck(nickName: String?, id: String?, pw: String?, mbti: String?): Boolean {
-        return if (nickName.isNullOrEmpty() || id.isNullOrEmpty() || pw.isNullOrEmpty() || mbti.isNullOrEmpty()) {
-            binding.root.showSnackBar(getString(R.string.signup_warning_null))
-            false
-        } else {
-            true
-        }
-    }
-
-    private fun navigateToLogin(nickName: String?, id: String?, pw: String?, mbti: String?) {
+    private fun navigateToLogin() {
         val intent = Intent(this, LoginActivity::class.java).apply {
-            putExtra("nickName", nickName)
-            putExtra("id", id)
-            putExtra("password", pw)
-            putExtra("mbti", mbti)
+            putExtra("nickName", viewModel.nickName.value)
+            putExtra("id", viewModel.id.value)
+            putExtra("password", viewModel.pw.value)
+            putExtra("mbti", viewModel.mbti.value)
         }
         setResult(RESULT_OK, intent)
         finish()
-        showToast("회원가입 성공했습니다")
+        showToast(getString(R.string.signUp_compleate))
     }
 }
+
+// 추후에 추가할 ... 코드
+//    private fun observeData() = with(binding) {
+//        viewModel.nickName.observe(this@SignUpActivity) { value ->
+//            if (value.isBlank()) {
+//                binding.signUpLyNickName.error = getString(R.string.signUp_warning_nickName)
+//            } else {
+//                binding.signUpLyNickName.error = null
+//            }
+//        }
+//        viewModel.id.observe(this@SignUpActivity) { value ->
+//            if (value.length !in 6..10) {
+//                binding.signUpLyId.error = getString(R.string.signUp_warning_id)
+//            } else {
+//                binding.signUpLyId.error = null
+//            }
+//        }
+//        viewModel.pw.observe(this@SignUpActivity) { value ->
+//            if (value.length !in 8..10) {
+//                binding.signUpLyPw.error = getString(R.string.signUp_warning_pw)
+//            } else {
+//                binding.signUpLyPw.error = null
+//            }
+//        }
+//        viewModel.mbti.observe(this@SignUpActivity) { value ->
+//            if (value.length != 4) {
+//                binding.signUpLyMbti.error = getString(R.string.signUp_warning_mbti)
+//            } else {
+//                binding.signUpLyMbti.error = null
+//            }
+//        }
+//    }

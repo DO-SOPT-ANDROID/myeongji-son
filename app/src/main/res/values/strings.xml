@@ -18,10 +18,11 @@
     <string name="signUp_mbti">MBTI</string>
     <string name="signUp_hint_mbti">MBTI를 입력해주세요(필수)</string>
     <string name="signUp_button">회원가입</string>
-    <string name="signUp_warning_nickName">*닉네임을 필수로 입력해주세요!</string>
-    <string name="signUp_warning_id">*아이디를 필수로 입력해주세요!</string>
-    <string name="signUp_warning_pw">*비밀번호를 필수로 입력해주세요!</string>
-    <string name="signUp_warning_mbti">*MBTI를 필수로 입력해주세요!</string>
+    <string name="signUp_warning_nickName">*닉네임은 한 글자 이상, 공백만으로는 불가합니다.</string>
+    <string name="signUp_warning_id">*아이디는 6~10 글자로만 가능합니다.</string>
+    <string name="signUp_warning_pw">*비밀번호는 8~12 글자로만 가능합니다.</string>
+    <string name="signUp_warning_mbti">*MBTI는 4글자로만 이루어져야 합니다.</string>
+    <string name="signup_warning_null">모든 항목을 작성해주세요</string>
     <string name="signUp_title">회원가입</string>
 
     <!--메인페이지-->
@@ -32,4 +33,5 @@
     <string name="do_android_title"><![CDATA[안봉이들 파이팅>.<]]></string>
     <string name="home_my_name">손수호</string>
     <string name="home_btn_status_message">상태메시지</string>
+    <string name="signUp_compleate">회원가입 성공했습니다</string>
 </resources>
