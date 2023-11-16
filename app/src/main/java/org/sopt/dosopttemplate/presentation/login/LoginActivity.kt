@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                     val responseData: ResponseSignIn? = response.body()
                     val responseId = responseData?.id
                     withContext(Dispatchers.Main) {
-                        showToastLong("로그인이 성공하였고 유저의 ID는 ${responseId}입니둥")
+                        showToastLong("로그인에 성공하였고 유저의 ID는 ${responseId}입니둥")
                     }
                     startMainActivity()
                 } else {
