@@ -7,6 +7,24 @@ import kotlinx.serialization.Serializable
 data class ResponseUser(
     @SerialName("data")
     val data: List<Data>,
+    @SerialName("page")
+    val page: Int,
+    @SerialName("per_page")
+    val per_page: Int,
+    @SerialName("support")
+    val support: Support,
+    @SerialName("total")
+    val total: Int,
+    @SerialName("total_pages")
+    val total_pages: Int,
+)
+
+@Serializable
+data class Support(
+    @SerialName("text")
+    val text: String,
+    @SerialName("url")
+    val url: String,
 )
 
 @Serializable

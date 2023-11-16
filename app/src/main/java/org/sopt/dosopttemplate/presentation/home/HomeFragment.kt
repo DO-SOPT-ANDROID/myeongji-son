@@ -1,10 +1,16 @@
 package org.sopt.dosopttemplate.presentation.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.sopt.dosopttemplate.data.ApiManager
+import org.sopt.dosopttemplate.data.api.UserService
 import org.sopt.dosopttemplate.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -24,6 +30,25 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initUserData()
+    }
+
+    private fun initUserData() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val userService = ApiManager.createTest<UserService>()
+            try {
+                val response = userService.getUserList()
+                if (response.isSuccessful) {
+                    val response = response.body()?.data
+                    Log.d("hi", response.toString())
+                } else {
+                    Log.d("hi", response.code().toString())
+                }
+            } catch (e: Exception) {
+                Log.d("hi", e.toString())
+            }
+        }
     }
 
     override fun onDestroyView() {

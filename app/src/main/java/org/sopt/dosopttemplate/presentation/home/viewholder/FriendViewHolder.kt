@@ -10,7 +10,7 @@ class FriendViewHolder(private val binding: ItemFriendListBinding) :
         with(binding) {
             ivFriendItemProfile.setImageResource(friendData.profileImage)
             friendRVTvName.text = friendData.name
-            friendRVTvStatusMessage.text = friendData.statusMessage
+            friendRVTvEmail.text = friendData.statusMessage
         }
     }
 }

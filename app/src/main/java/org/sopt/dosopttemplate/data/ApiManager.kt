@@ -18,10 +18,12 @@ object ApiManager {
 
     val retrofitTest: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://reqres.in/")
+            .baseUrl("https://reqres.in/api/")
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
 
     inline fun <reified T> create(): T = retrofit.create<T>(T::class.java)
+
+    inline fun <reified T> createTest(): T = retrofitTest.create<T>(T::class.java)
 }
