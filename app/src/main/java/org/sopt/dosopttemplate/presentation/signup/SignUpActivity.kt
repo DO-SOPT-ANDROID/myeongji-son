@@ -4,9 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.R
+import org.sopt.dosopttemplate.data.ApiManager
+import org.sopt.dosopttemplate.data.api.AuthService
+import org.sopt.dosopttemplate.data.model.request.RequestSignUp
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
 import org.sopt.dosopttemplate.presentation.login.LoginActivity
 import org.sopt.dosopttemplate.util.showToast
@@ -127,7 +134,33 @@ class SignUpActivity : AppCompatActivity() {
     private fun validateInformationCondition() {
         with(binding) {
             if (signUpLyNickName.error == null && signUpLyId.error == null && signUpLyPw.error == null && signUpLyMbti.error == null) {
-                navigateToLogin()
+                viewModel.id.value?.let {
+                    viewModel.pw.value?.let { it1 ->
+                        viewModel.nickName.value?.let { it2 ->
+                            registerUser(
+                                it,
+                                it1,
+                                it2,
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun registerUser(id: String, pw: String, nickname: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val registerService = ApiManager.create<AuthService>()
+            try {
+                val response = registerService.postSignUp(RequestSignUp(id, pw, nickname))
+                if (response.isSuccessful) {
+                    navigateToLogin()
+                } else {
+                }
+            } catch (e: Exception) {
+                Log.e("signup", "Failed to register user", e)
+                showToast("예기치 못한 오류가 발생했습니다.")
             }
         }
     }
