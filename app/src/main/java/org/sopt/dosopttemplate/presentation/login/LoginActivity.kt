@@ -1,17 +1,13 @@
 package org.sopt.dosopttemplate.presentation.login
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
 import org.sopt.dosopttemplate.presentation.HomeActivity
 import org.sopt.dosopttemplate.presentation.signup.SignUpActivity
-import org.sopt.dosopttemplate.util.showToast
 
 class LoginActivity : AppCompatActivity() {
 
@@ -32,30 +28,14 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getUserDataFromSignUp()
-
         clickLoginBtn()
 
         initSignUpBtnClickListener()
     }
 
-    private fun getUserDataFromSignUp() {
-        resultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    val userData = result.data
-                    id = userData?.getStringExtra("id") ?: ""
-                    nickName = userData?.getStringExtra("nickName") ?: ""
-                    pw = userData?.getStringExtra("password") ?: ""
-                    mbti = userData?.getStringExtra("mbti") ?: ""
-                }
-            }
-    }
-
     private fun clickLoginBtn() {
         binding.loginButton.setOnClickListener {
             updateValues()
-            checkData()
         }
     }
 
@@ -63,19 +43,6 @@ class LoginActivity : AppCompatActivity() {
         with(binding) {
             loginId = loginEtId.text.toString()
             loginPw = loginEtPw.text.toString()
-        }
-    }
-
-    private fun checkData() {
-        if (::id.isInitialized && ::pw.isInitialized) {
-            if (loginId == id && loginPw == pw) {
-                startMainActivity()
-                showToast(getString(R.string.login_complete))
-            } else {
-                showToast(getString(R.string.login_wrong))
-            }
-        } else {
-            showToast(getString(R.string.login_not_signUp))
         }
     }
 
@@ -96,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
     private fun initSignUpBtnClickListener() = with(binding) {
         loginTvSingUp.setOnClickListener {
             val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
-            resultLauncher.launch(intent)
+            startActivity(intent)
         }
     }
 }

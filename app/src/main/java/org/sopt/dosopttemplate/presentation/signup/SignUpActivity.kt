@@ -178,13 +178,8 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun navigateToLogin() {
-        val intent = Intent(this, LoginActivity::class.java).apply {
-            putExtra("nickName", viewModel.nickName.value)
-            putExtra("id", viewModel.id.value)
-            putExtra("password", viewModel.pw.value)
-            putExtra("mbti", viewModel.mbti.value)
-        }
-        setResult(RESULT_OK, intent)
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
         finish()
         showToast(getString(R.string.signUp_complete))
     }
