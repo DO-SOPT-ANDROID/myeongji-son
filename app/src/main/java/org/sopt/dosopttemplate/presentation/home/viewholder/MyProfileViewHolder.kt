@@ -6,8 +6,10 @@ import org.sopt.dosopttemplate.databinding.ItemMyProfileBinding
 
 class MyProfileViewHolder(private val binding: ItemMyProfileBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun onBind(profileData: MyProfile) = with(binding) {
-        homeIvMyProfile.setImageResource(profileData.profileImage)
-        homeTvMyName.text = profileData.name
+    fun onBind(profileData: MyProfile) {
+        with(binding) {
+            homeIvMyProfile.setImageResource(profileData.profileImage)
+            homeTvMyName.text = profileData.name
+        }
     }
 }
