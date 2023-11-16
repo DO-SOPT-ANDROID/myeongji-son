@@ -4,7 +4,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import org.sopt.dosopttemplate.BuildConfig
-import org.sopt.dosopttemplate.data.model.api.AuthService
+import org.sopt.dosopttemplate.data.api.AuthService
 import retrofit2.Retrofit
 
 object ApiManager {

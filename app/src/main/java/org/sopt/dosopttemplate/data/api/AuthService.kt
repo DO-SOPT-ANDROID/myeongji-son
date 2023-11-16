@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate.data.model.api
+package org.sopt.dosopttemplate.data.api
 
 import org.sopt.dosopttemplate.data.model.request.RequestSignUp
 import org.sopt.dosopttemplate.data.model.response.ResponseSignUp
