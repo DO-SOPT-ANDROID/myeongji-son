@@ -181,7 +181,9 @@ class SignUpActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
-        showToast(getString(R.string.signUp_complete))
+        CoroutineScope(Dispatchers.Main).launch {
+            showToast(getString(R.string.signUp_complete))
+        }
     }
 
     companion object {
