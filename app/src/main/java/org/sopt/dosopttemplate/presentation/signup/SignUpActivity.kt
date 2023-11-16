@@ -46,7 +46,7 @@ class SignUpActivity : AppCompatActivity() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
 
-            binding.signUpEtId.addTextChangedListener(object : TextWatcher {
+            signUpEtId.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     if ((s == null) || (s.length !in (ID_MIN_VALUE..ID_MAX_VALUE))) {
                         signUpLyId.error = getString(R.string.signUp_warning_id)
