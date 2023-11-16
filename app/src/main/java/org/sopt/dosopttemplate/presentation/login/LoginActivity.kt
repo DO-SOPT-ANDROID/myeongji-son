@@ -8,6 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.data.ApiManager
 import org.sopt.dosopttemplate.data.api.AuthService
 import org.sopt.dosopttemplate.data.model.request.RequestSignIn
@@ -59,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
                     val responseData: ResponseSignIn? = response.body()
                     val responseId = responseData?.id
                     withContext(Dispatchers.Main) {
-                        showToastLong("로그인에 성공하였고 유저의 ID는 ${responseId}입니둥")
+                        showToastLong(getString(R.string.success_login).format(responseId))
                     }
                     startMainActivity()
                 } else {
@@ -75,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 Log.e("signup", "Failed to register user", e)
                 withContext(Dispatchers.Main) {
-                    showToastShort("예기치 못한 오류가 발생했습니다. 와이파이 연결을 확인해보세요")
+                    showToastShort(getString(R.string.all_unexpected_error_message))
                 }
             }
         }

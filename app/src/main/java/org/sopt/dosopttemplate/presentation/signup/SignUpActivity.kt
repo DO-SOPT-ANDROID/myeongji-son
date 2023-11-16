@@ -167,7 +167,7 @@ class SignUpActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 Log.e("signup", "Failed to register user", e)
                 withContext(Dispatchers.Main) {
-                    showToastShort("예기치 못한 오류가 발생했습니다. 와이파이 연결을 확인해보세요")
+                    showToastShort(getString(R.string.all_unexpected_error_message))
                 }
             }
         }
