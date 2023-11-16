@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.sopt.dosopttemplate.data.ApiManager
 import org.sopt.dosopttemplate.data.api.UserService
 import org.sopt.dosopttemplate.databinding.FragmentHomeBinding
+import org.sopt.dosopttemplate.presentation.home.adapter.FriendAdapter
 
 class HomeFragment : Fragment() {
 
@@ -41,7 +43,13 @@ class HomeFragment : Fragment() {
                 val response = userService.getUserList()
                 if (response.isSuccessful) {
                     val response = response.body()?.data
-                    Log.d("hi", response.toString())
+
+                    response.let {
+                        withContext(Dispatchers.Main) {
+                            val adapter = it?.let { it1 -> FriendAdapter(it1) }
+                            binding.rvFriend.adapter = adapter
+                        }
+                    }
                 } else {
                     Log.d("hi", response.code().toString())
                 }
