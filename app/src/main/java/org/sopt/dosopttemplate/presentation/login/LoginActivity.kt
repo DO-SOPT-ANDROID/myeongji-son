@@ -16,7 +16,8 @@ import org.sopt.dosopttemplate.data.model.response.ResponseSignIn
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
 import org.sopt.dosopttemplate.presentation.HomeActivity
 import org.sopt.dosopttemplate.presentation.signup.SignUpActivity
-import org.sopt.dosopttemplate.util.showToast
+import org.sopt.dosopttemplate.util.showToastLong
+import org.sopt.dosopttemplate.util.showToastShort
 
 class LoginActivity : AppCompatActivity() {
 
@@ -58,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                     val responseData: ResponseSignIn? = response.body()
                     val responseId = responseData?.id
                     withContext(Dispatchers.Main) {
-                        showToast("로그인이 성공하였고 유저의 ID는 ${responseId}입니둥")
+                        showToastLong("로그인이 성공하였고 유저의 ID는 ${responseId}입니둥")
                     }
                     startMainActivity()
                 } else {
@@ -67,14 +68,14 @@ class LoginActivity : AppCompatActivity() {
                     val errorMessage = errorResponse?.message
                     withContext(Dispatchers.Main) {
                         if (errorMessage != null) {
-                            showToast(errorMessage)
+                            showToastShort(errorMessage)
                         }
                     }
                 }
             } catch (e: Exception) {
                 Log.e("signup", "Failed to register user", e)
                 withContext(Dispatchers.Main) {
-                    showToast("예기치 못한 오류가 발생했습니다. 와이파이 연결을 확인해보세요")
+                    showToastShort("예기치 못한 오류가 발생했습니다. 와이파이 연결을 확인해보세요")
                 }
             }
         }

@@ -18,7 +18,7 @@ import org.sopt.dosopttemplate.data.model.request.RequestSignUp
 import org.sopt.dosopttemplate.data.model.response.ResponseError.Companion.parseErrorResponse
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
 import org.sopt.dosopttemplate.presentation.login.LoginActivity
-import org.sopt.dosopttemplate.util.showToast
+import org.sopt.dosopttemplate.util.showToastShort
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -164,14 +164,14 @@ class SignUpActivity : AppCompatActivity() {
                     val errorMessage = errorResponse?.message
                     withContext(Dispatchers.Main) {
                         if (errorMessage != null) {
-                            showToast(errorMessage)
+                            showToastShort(errorMessage)
                         }
                     }
                 }
             } catch (e: Exception) {
                 Log.e("signup", "Failed to register user", e)
                 withContext(Dispatchers.Main) {
-                    showToast("예기치 못한 오류가 발생했습니다. 와이파이 연결을 확인해보세요")
+                    showToastShort("예기치 못한 오류가 발생했습니다. 와이파이 연결을 확인해보세요")
                 }
             }
         }
@@ -182,7 +182,7 @@ class SignUpActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
         CoroutineScope(Dispatchers.Main).launch {
-            showToast(getString(R.string.signUp_complete))
+            showToastShort(getString(R.string.signUp_complete))
         }
     }
 
