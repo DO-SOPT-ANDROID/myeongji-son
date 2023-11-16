@@ -10,10 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.data.ApiManager
 import org.sopt.dosopttemplate.data.api.AuthService
 import org.sopt.dosopttemplate.data.model.request.RequestSignUp
+import org.sopt.dosopttemplate.data.model.response.ResponseError.Companion.parseErrorResponse
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
 import org.sopt.dosopttemplate.presentation.login.LoginActivity
 import org.sopt.dosopttemplate.util.showToast
@@ -157,10 +159,20 @@ class SignUpActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     navigateToLogin()
                 } else {
+                    val errorBody = response.errorBody()?.string()
+                    val errorResponse = parseErrorResponse(errorBody)
+                    val errorMessage = errorResponse?.message
+                    withContext(Dispatchers.Main) {
+                        if (errorMessage != null) {
+                            showToast(errorMessage)
+                        }
+                    }
                 }
             } catch (e: Exception) {
                 Log.e("signup", "Failed to register user", e)
-                showToast("예기치 못한 오류가 발생했습니다.")
+                withContext(Dispatchers.Main) {
+                    showToast("예기치 못한 오류가 발생했습니다. 와이파이 연결을 확인해보세요")
+                }
             }
         }
     }
