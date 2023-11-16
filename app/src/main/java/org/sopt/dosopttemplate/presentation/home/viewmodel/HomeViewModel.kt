@@ -2,8 +2,8 @@ package org.sopt.dosopttemplate.presentation.home.viewmodel
 
 import androidx.lifecycle.ViewModel
 import org.sopt.dosopttemplate.R
-import org.sopt.dosopttemplate.data.Friend
-import org.sopt.dosopttemplate.data.MyProfile
+import org.sopt.dosopttemplate.presentation.home.data.Friend
+import org.sopt.dosopttemplate.presentation.home.data.MyProfile
 
 class HomeViewModel : ViewModel() {
     val mockFriends = listOf(
