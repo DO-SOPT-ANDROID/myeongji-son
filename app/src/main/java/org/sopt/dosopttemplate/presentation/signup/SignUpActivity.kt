@@ -111,7 +111,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun clickSignUpBtn() {
         binding.signUpBtn.setOnClickListener {
             updateValues()
-            validateInformation()
+            validateInformationCondition()
         }
     }
 
@@ -124,9 +124,11 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateInformation() = with(binding) {
-        if (signUpLyNickName.error == null && signUpLyId.error == null && signUpLyPw.error == null && signUpLyMbti.error == null) {
-            navigateToLogin()
+    private fun validateInformationCondition() {
+        with(binding) {
+            if (signUpLyNickName.error == null && signUpLyId.error == null && signUpLyPw.error == null && signUpLyMbti.error == null) {
+                navigateToLogin()
+            }
         }
     }
 
