@@ -136,16 +136,12 @@ class SignUpActivity : AppCompatActivity() {
     private fun validateInformationCondition() {
         with(binding) {
             if (signUpLyNickName.error == null && signUpLyId.error == null && signUpLyPw.error == null && signUpLyMbti.error == null) {
-                viewModel.id.value?.let {
-                    viewModel.pw.value?.let { it1 ->
-                        viewModel.nickName.value?.let { it2 ->
-                            registerUser(
-                                it,
-                                it1,
-                                it2,
-                            )
-                        }
-                    }
+                val id = viewModel.id.value
+                val pw = viewModel.pw.value
+                val nickNmae = viewModel.nickName.value
+
+                if (id != null && pw != null && nickNmae != null) {
+                    registerUser(id, pw, nickNmae)
                 }
             }
         }
