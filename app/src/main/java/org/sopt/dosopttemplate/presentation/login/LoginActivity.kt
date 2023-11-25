@@ -2,18 +2,12 @@ package org.sopt.dosopttemplate.presentation.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.sopt.dosopttemplate.R
-import org.sopt.dosopttemplate.data.ApiManager
-import org.sopt.dosopttemplate.data.api.AuthService
-import org.sopt.dosopttemplate.data.model.request.RequestSignIn
-import org.sopt.dosopttemplate.data.model.response.ResponseError
-import org.sopt.dosopttemplate.data.model.response.ResponseSignIn
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
 import org.sopt.dosopttemplate.presentation.HomeActivity
 import org.sopt.dosopttemplate.presentation.signup.SignUpActivity
@@ -23,6 +17,8 @@ import org.sopt.dosopttemplate.util.showToastShort
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+
+    private val loginViewModel by viewModels<LoginViewModel>()
 
     private lateinit var loginId: String
     private lateinit var loginPw: String
@@ -35,12 +31,19 @@ class LoginActivity : AppCompatActivity() {
         initSignUpBtnClickListener()
 
         clickLoginBtn()
+
+        observeLoginResult()
     }
 
     private fun clickLoginBtn() {
         binding.loginButton.setOnClickListener {
             updateValues()
-            loginUser(loginId, loginPw)
+            CoroutineScope(Dispatchers.IO).launch {
+                loginUser(
+                    loginId,
+                    loginPw,
+                )
+            }
         }
     }
 
@@ -51,33 +54,20 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun loginUser(id: String, pw: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val loginService = ApiManager.create<AuthService>()
-            try {
-                val response = loginService.postSignIn(RequestSignIn(id, pw))
-                if (response.isSuccessful) {
-                    val responseData: ResponseSignIn? = response.body()
-                    val responseId = responseData?.id
-                    withContext(Dispatchers.Main) {
-                        showToastLong(getString(R.string.success_login).format(responseId))
-                    }
-                    startMainActivity()
-                } else {
-                    val errorBody = response.errorBody()?.string()
-                    val errorResponse = ResponseError.parseErrorResponse(errorBody)
-                    val errorMessage = errorResponse?.message
-                    withContext(Dispatchers.Main) {
-                        if (errorMessage != null) {
-                            showToastShort(errorMessage)
-                        }
-                    }
-                }
-            } catch (e: Exception) {
-                Log.e("signup", "Failed to register user", e)
-                withContext(Dispatchers.Main) {
-                    showToastShort(getString(R.string.all_unexpected_error_message))
-                }
+    private suspend fun loginUser(loginId: String, loginPw: String) {
+        loginViewModel.login(
+            loginId,
+            loginPw,
+        )
+    }
+
+    private fun observeLoginResult() {
+        loginViewModel.loginSuccess.observe(this) {
+            if (it) {
+                showToastLong(getString(R.string.success_login))
+                startMainActivity()
+            } else {
+                showToastShort("로그인 실패")
             }
         }
     }
