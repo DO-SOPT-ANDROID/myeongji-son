@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -37,10 +37,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun initUserData() {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             val userService = ApiManager.createTest<UserService>()
             try {
-                val response = userService.getUserList()
+                val response = userService.getUserList(2)
                 if (response.isSuccessful) {
                     val response = response.body()?.data
 

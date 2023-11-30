@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -148,7 +149,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun registerUser(id: String, pw: String, nickname: String) {
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch {
             val registerService = ApiManager.create<AuthService>()
             try {
                 val response = registerService.postSignUp(RequestSignUp(id, pw, nickname))
