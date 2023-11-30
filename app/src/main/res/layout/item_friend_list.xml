@@ -32,7 +32,7 @@
         tools:text="손수호" />
 
     <TextView
-        android:id="@+id/friendRV_tv_status_message"
+        android:id="@+id/friendRV_tv_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -44,6 +44,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/friendRV_tv_name"
         app:layout_constraintTop_toTopOf="@id/friendRV_tv_name"
-        tools:text="나랑 썰매 대결 할 사람 ㅋ 자신 없으면 말고 ㅋ" />
+        tools:text="ssssssssssssssssssonmj@gmail.com" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

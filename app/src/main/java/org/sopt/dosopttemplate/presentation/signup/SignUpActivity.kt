@@ -4,12 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.sopt.dosopttemplate.R
+import org.sopt.dosopttemplate.data.ApiManager
+import org.sopt.dosopttemplate.data.api.AuthService
+import org.sopt.dosopttemplate.data.model.request.RequestSignUp
+import org.sopt.dosopttemplate.data.model.response.ResponseError.Companion.parseErrorResponse
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
 import org.sopt.dosopttemplate.presentation.login.LoginActivity
-import org.sopt.dosopttemplate.util.showToast
+import org.sopt.dosopttemplate.util.showToastShort
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -127,21 +137,50 @@ class SignUpActivity : AppCompatActivity() {
     private fun validateInformationCondition() {
         with(binding) {
             if (signUpLyNickName.error == null && signUpLyId.error == null && signUpLyPw.error == null && signUpLyMbti.error == null) {
-                navigateToLogin()
+                val id = viewModel.id.value
+                val pw = viewModel.pw.value
+                val nickNmae = viewModel.nickName.value
+
+                if (id != null && pw != null && nickNmae != null) {
+                    registerUser(id, pw, nickNmae)
+                }
+            }
+        }
+    }
+
+    private fun registerUser(id: String, pw: String, nickname: String) {
+        lifecycleScope.launch {
+            val registerService = ApiManager.create<AuthService>()
+            try {
+                val response = registerService.postSignUp(RequestSignUp(id, pw, nickname))
+                if (response.isSuccessful) {
+                    navigateToLogin()
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    val errorResponse = parseErrorResponse(errorBody)
+                    val errorMessage = errorResponse?.message
+                    withContext(Dispatchers.Main) {
+                        if (errorMessage != null) {
+                            showToastShort(errorMessage)
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("signup", "Failed to register user", e)
+                withContext(Dispatchers.Main) {
+                    showToastShort(getString(R.string.all_unexpected_error_message))
+                }
             }
         }
     }
 
     private fun navigateToLogin() {
-        val intent = Intent(this, LoginActivity::class.java).apply {
-            putExtra("nickName", viewModel.nickName.value)
-            putExtra("id", viewModel.id.value)
-            putExtra("password", viewModel.pw.value)
-            putExtra("mbti", viewModel.mbti.value)
-        }
-        setResult(RESULT_OK, intent)
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
         finish()
-        showToast(getString(R.string.signUp_complete))
+        CoroutineScope(Dispatchers.Main).launch {
+            showToastShort(getString(R.string.signUp_complete))
+        }
     }
 
     companion object {

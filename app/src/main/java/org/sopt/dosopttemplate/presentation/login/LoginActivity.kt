@@ -1,61 +1,49 @@
 package org.sopt.dosopttemplate.presentation.login
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
 import org.sopt.dosopttemplate.presentation.HomeActivity
 import org.sopt.dosopttemplate.presentation.signup.SignUpActivity
-import org.sopt.dosopttemplate.util.showToast
+import org.sopt.dosopttemplate.util.showToastLong
+import org.sopt.dosopttemplate.util.showToastShort
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
-    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    private val loginViewModel by viewModels<LoginViewModel>()
 
     private lateinit var loginId: String
     private lateinit var loginPw: String
-
-    private lateinit var id: String
-    private lateinit var pw: String
-    private lateinit var nickName: String
-    private lateinit var mbti: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getUserDataFromSignUp()
+        initSignUpBtnClickListener()
 
         clickLoginBtn()
 
-        initSignUpBtnClickListener()
-    }
-
-    private fun getUserDataFromSignUp() {
-        resultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    val userData = result.data
-                    id = userData?.getStringExtra("id") ?: ""
-                    nickName = userData?.getStringExtra("nickName") ?: ""
-                    pw = userData?.getStringExtra("password") ?: ""
-                    mbti = userData?.getStringExtra("mbti") ?: ""
-                }
-            }
+        observeLoginResult()
     }
 
     private fun clickLoginBtn() {
         binding.loginButton.setOnClickListener {
             updateValues()
-            checkData()
+            CoroutineScope(Dispatchers.IO).launch {
+                loginUser(
+                    loginId,
+                    loginPw,
+                )
+            }
         }
     }
 
@@ -66,29 +54,26 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkData() {
-        if (::id.isInitialized && ::pw.isInitialized) {
-            if (loginId == id && loginPw == pw) {
+    private suspend fun loginUser(loginId: String, loginPw: String) {
+        loginViewModel.login(
+            loginId,
+            loginPw,
+        )
+    }
+
+    private fun observeLoginResult() {
+        loginViewModel.loginSuccess.observe(this) {
+            if (it) {
+                showToastLong(getString(R.string.success_login))
                 startMainActivity()
-                showToast(getString(R.string.login_complete))
             } else {
-                showToast(getString(R.string.login_wrong))
+                showToastShort("로그인 실패")
             }
-        } else {
-            showToast(getString(R.string.login_not_signUp))
         }
     }
 
     private fun startMainActivity() {
         val intent = Intent(this, HomeActivity::class.java)
-        val sp = this.getSharedPreferences("USER_DATA", Context.MODE_PRIVATE)
-        with(sp.edit()) {
-            putString("nickName", nickName)
-            putString("id", id)
-            putString("mbti", mbti)
-            commit()
-        }
-
         startActivity(intent)
         finish()
     }
@@ -96,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
     private fun initSignUpBtnClickListener() = with(binding) {
         loginTvSingUp.setOnClickListener {
             val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
-            resultLauncher.launch(intent)
+            startActivity(intent)
         }
     }
 }
