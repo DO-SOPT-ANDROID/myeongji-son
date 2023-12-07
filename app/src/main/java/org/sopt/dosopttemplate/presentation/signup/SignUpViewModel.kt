@@ -22,6 +22,10 @@ class SignUpViewModel : ViewModel() {
         validateNicknameField()
     }
 
+    fun isAllFieldsValid(): Boolean {
+        return isNickNameValid.value == true && isIdValid.value == true && isPwValid.value == true && isMbtiValid.value == true
+    }
+
     fun validateNicknameField() {
         isNickNameValid.value = !nickName.value.isNullOrBlank()
     }
