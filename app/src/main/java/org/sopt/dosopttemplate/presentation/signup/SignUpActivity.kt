@@ -5,10 +5,24 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.sopt.dosopttemplate.R
+import org.sopt.dosopttemplate.data.ApiManager
+import org.sopt.dosopttemplate.data.api.AuthService
+import org.sopt.dosopttemplate.data.model.request.RequestSignUp
+import org.sopt.dosopttemplate.data.model.response.ResponseError.Companion.parseErrorResponse
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
 import org.sopt.dosopttemplate.presentation.login.LoginActivity
-import org.sopt.dosopttemplate.util.showToast
+import org.sopt.dosopttemplate.util.showToastShort
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -87,14 +101,11 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun navigateToLogin() {
-        val intent = Intent(this, LoginActivity::class.java).apply {
-            putExtra("nickName", viewModel.nickName.value)
-            putExtra("id", viewModel.id.value)
-            putExtra("password", viewModel.pw.value)
-            putExtra("mbti", viewModel.mbti.value)
-        }
-        setResult(RESULT_OK, intent)
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
         finish()
-        showToast(getString(R.string.signUp_complete))
+        CoroutineScope(Dispatchers.Main).launch {
+            showToastShort(getString(R.string.signUp_complete))
+        }
     }
 }

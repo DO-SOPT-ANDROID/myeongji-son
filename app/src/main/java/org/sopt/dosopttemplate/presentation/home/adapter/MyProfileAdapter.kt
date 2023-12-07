@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.sopt.dosopttemplate.data.MyProfile
+import org.sopt.dosopttemplate.presentation.home.data.MyProfile
 import org.sopt.dosopttemplate.databinding.ItemMyProfileBinding
 import org.sopt.dosopttemplate.presentation.home.viewholder.MyProfileViewHolder
 
