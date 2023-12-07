@@ -31,7 +31,7 @@ class SignUpViewModel : ViewModel() {
     }
 
     fun validatePwField() {
-        isPwValid.value = pw.value?.length in (PW_MIN_VALUE..PW_MAX_VALUE)
+        isPwValid.value = pw.value?.matches(PW_PATTERN.toRegex())
     }
 
     fun validateMBTIField() {
@@ -40,8 +40,8 @@ class SignUpViewModel : ViewModel() {
 
     companion object {
         const val ID_PATTERN = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,10}$"
-        const val PW_MIN_VALUE = 8
-        const val PW_MAX_VALUE = 10
+        const val PW_PATTERN =
+            "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[\$@\$!%*#?&])[A-Za-z\\d\$@\$!%*#?&]{6,12}\$"
         const val MBTI_VALUE = 4
     }
 }
