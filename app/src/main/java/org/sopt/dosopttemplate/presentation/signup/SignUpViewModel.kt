@@ -27,7 +27,7 @@ class SignUpViewModel : ViewModel() {
     }
 
     fun validateIdField() {
-        isIdValid.value = id.value?.length in (ID_MIN_VALUE..ID_MAX_VALUE)
+        isIdValid.value = id.value?.matches(ID_PATTERN.toRegex())
     }
 
     fun validatePwField() {
@@ -39,8 +39,7 @@ class SignUpViewModel : ViewModel() {
     }
 
     companion object {
-        const val ID_MIN_VALUE = 6
-        const val ID_MAX_VALUE = 10
+        const val ID_PATTERN = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,10}$"
         const val PW_MIN_VALUE = 8
         const val PW_MAX_VALUE = 10
         const val MBTI_VALUE = 4
