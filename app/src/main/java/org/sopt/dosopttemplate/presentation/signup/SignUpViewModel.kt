@@ -39,13 +39,13 @@ class SignUpViewModel : ViewModel() {
     }
 
     fun validateMBTIField() {
-        isMbtiValid.value = mbti.value?.length == MBTI_VALUE
+        isMbtiValid.value = mbti.value?.matches(MBTI_PATTERN.toRegex())
     }
 
     companion object {
         const val ID_PATTERN = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,10}$"
         const val PW_PATTERN =
             "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[\$@\$!%*#?&])[A-Za-z\\d\$@\$!%*#?&]{6,12}\$"
-        const val MBTI_VALUE = 4
+        const val MBTI_PATTERN = "^[a-zA-Z]{4}\$"
     }
 }
