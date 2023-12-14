@@ -23,9 +23,9 @@
     <string name="signUp_hint_mbti">MBTI를 입력해주세요(필수)</string>
     <string name="signUp_button">회원가입</string>
     <string name="signUp_warning_nickName">*닉네임은 한 글자 이상, 공백만으로는 불가합니다.</string>
-    <string name="signUp_warning_id">*아이디는 6~10 글자로만 가능합니다.</string>
-    <string name="signUp_warning_pw">*비밀번호는 8~12 글자로만 가능합니다.</string>
-    <string name="signUp_warning_mbti">*MBTI는 4글자로만 이루어져야 합니다.</string>
+    <string name="signUp_warning_id">*아이디는 6~10 글자이내, 영문 및 숫자가 포함되어야 합니다.</string>
+    <string name="signUp_warning_pw">*비밀번호는 6~12 글자이내, 영문 및 숫자, 특수문자가 포함되어야 합니다.</string>
+    <string name="signUp_warning_mbti">*MBTI는 영문자 4글자로만 이루어져야 합니다.</string>
     <string name="signup_warning_null">모든 항목을 작성해주세요</string>
     <string name="signUp_title">회원가입</string>
 

@@ -1,177 +1,122 @@
 package org.sopt.dosopttemplate.presentation.signup
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import androidx.core.widget.addTextChangedListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.sopt.dosopttemplate.R
-import org.sopt.dosopttemplate.data.ApiManager
-import org.sopt.dosopttemplate.data.api.AuthService
-import org.sopt.dosopttemplate.data.model.request.RequestSignUp
-import org.sopt.dosopttemplate.data.model.response.ResponseError.Companion.parseErrorResponse
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
 import org.sopt.dosopttemplate.presentation.login.LoginActivity
 import org.sopt.dosopttemplate.util.showToastShort
 
 class SignUpActivity : AppCompatActivity() {
 
-    private val viewModel: SingUpViewModel by viewModels()
+    private val viewModel: SignUpViewModel by viewModels()
     private lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setUpTextWatchers()
+        observeViewModel()
         clickSignUpBtn()
     }
 
     private fun setUpTextWatchers() {
         with(binding) {
-            signUpEtNickName.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    if (s.isNullOrBlank()) {
-                        signUpLyNickName.error = getString(R.string.signUp_warning_nickName)
-                    } else {
-                        signUpLyNickName.error = null
-                    }
-                }
+            signUpEtNickName.addTextChangedListener {
+                viewModel.nickName.value = it.toString()
+                viewModel.validateNicknameField()
+            }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+            signUpEtId.addTextChangedListener {
+                viewModel.id.value = it.toString()
+                viewModel.validateIdField()
+            }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            })
+            signUpEtPw.addTextChangedListener {
+                viewModel.pw.value = it.toString()
+                viewModel.validatePwField()
+            }
 
-            signUpEtId.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    if ((s == null) || (s.length !in (ID_MIN_VALUE..ID_MAX_VALUE))) {
-                        signUpLyId.error = getString(R.string.signUp_warning_id)
-                    } else {
-                        signUpLyId.error = null
-                    }
-                }
+            signUpEtMbti.addTextChangedListener {
+                viewModel.mbti.value = it.toString()
+                viewModel.validateMBTIField()
+            }
+        }
+    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+    private fun observeViewModel() {
+        with(viewModel) {
+            isNickNameValid.observe(this@SignUpActivity) { isValid ->
+                binding.signUpLyNickName.error =
+                    if (isValid) null else getString(R.string.signUp_warning_nickName)
+                updateSignUpBtnState()
+            }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            })
+            isIdValid.observe(this@SignUpActivity) { isValid ->
+                binding.signUpLyId.error =
+                    if (isValid) null else getString(R.string.signUp_warning_id)
+                updateSignUpBtnState()
+            }
 
-            signUpEtPw.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    if ((s == null) || (s.length !in (PW_MIN_VALUE..PW_MAX_VALUE))) {
-                        signUpLyPw.error = getString(R.string.signUp_warning_pw)
-                    } else {
-                        signUpLyPw.error = null
-                    }
-                }
+            isPwValid.observe(this@SignUpActivity) { isValid ->
+                binding.signUpLyPw.error =
+                    if (isValid) null else getString(R.string.signUp_warning_pw)
+                updateSignUpBtnState()
+            }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+            isMbtiValid.observe(this@SignUpActivity) { isValid ->
+                binding.signUpLyMbti.error =
+                    if (isValid) null else getString(R.string.signUp_warning_mbti)
+                updateSignUpBtnState()
+            }
+        }
+    }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            })
-
-            signUpEtMbti.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    if ((s == null) || (s.length != MBTI_VALUE)) {
-                        signUpLyMbti.error = getString(R.string.signUp_warning_mbti)
-                    } else {
-                        signUpLyMbti.error = null
-                    }
-                }
-
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            })
+    private fun updateSignUpBtnState() {
+        val allValid = listOf(
+            viewModel.isNickNameValid,
+            viewModel.isIdValid,
+            viewModel.isPwValid,
+            viewModel.isMbtiValid,
+        ).all { it.value == true }
+        with(binding.signUpBtn) {
+            isClickable = allValid
+            isFocusable = allValid
+            backgroundTintList = ColorStateList.valueOf(
+                if (allValid) getColor(R.color.green) else getColor(R.color.light_green),
+            )
         }
     }
 
     private fun clickSignUpBtn() {
         binding.signUpBtn.setOnClickListener {
-            updateValues()
-            validateInformationCondition()
-        }
-    }
-
-    private fun updateValues() {
-        with(binding) {
-            viewModel.nickName.value = signUpEtNickName.text.toString()
-            viewModel.id.value = signUpEtId.text.toString()
-            viewModel.pw.value = signUpEtPw.text.toString()
-            viewModel.mbti.value = signUpEtMbti.text.toString()
+            viewModel.validateField()
+            if (viewModel.isAllFieldsValid()) {
+                validateInformationCondition()
+            }
         }
     }
 
     private fun validateInformationCondition() {
-        with(binding) {
-            if (signUpLyNickName.error == null && signUpLyId.error == null && signUpLyPw.error == null && signUpLyMbti.error == null) {
-                val id = viewModel.id.value
-                val pw = viewModel.pw.value
-                val nickNmae = viewModel.nickName.value
-
-                if (id != null && pw != null && nickNmae != null) {
-                    registerUser(id, pw, nickNmae)
-                }
-            }
+        if (isAllValid()) {
+            navigateToLogin()
         }
     }
 
-    private fun registerUser(id: String, pw: String, nickname: String) {
-        lifecycleScope.launch {
-            val registerService = ApiManager.create<AuthService>()
-            try {
-                val response = registerService.postSignUp(RequestSignUp(id, pw, nickname))
-                if (response.isSuccessful) {
-                    navigateToLogin()
-                } else {
-                    val errorBody = response.errorBody()?.string()
-                    val errorResponse = parseErrorResponse(errorBody)
-                    val errorMessage = errorResponse?.message
-                    withContext(Dispatchers.Main) {
-                        if (errorMessage != null) {
-                            showToastShort(errorMessage)
-                        }
-                    }
-                }
-            } catch (e: Exception) {
-                Log.e("signup", "Failed to register user", e)
-                withContext(Dispatchers.Main) {
-                    showToastShort(getString(R.string.all_unexpected_error_message))
-                }
-            }
-        }
+    private fun isAllValid(): Boolean {
+        return viewModel.isNickNameValid.value == true &&
+            viewModel.isIdValid.value == true &&
+            viewModel.isPwValid.value == true &&
+            viewModel.isMbtiValid.value == true
     }
 
     private fun navigateToLogin() {
@@ -181,13 +126,5 @@ class SignUpActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             showToastShort(getString(R.string.signUp_complete))
         }
-    }
-
-    companion object {
-        const val ID_MIN_VALUE = 6
-        const val ID_MAX_VALUE = 10
-        const val PW_MIN_VALUE = 8
-        const val PW_MAX_VALUE = 10
-        const val MBTI_VALUE = 4
     }
 }
