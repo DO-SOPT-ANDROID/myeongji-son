@@ -107,9 +107,16 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun validateInformationCondition() {
-        if (viewModel.isNickNameValid.value == true && viewModel.isIdValid.value == true && viewModel.isPwValid.value == true && viewModel.isMbtiValid.value == true) {
+        if (isAllValid()) {
             navigateToLogin()
         }
+    }
+
+    private fun isAllValid(): Boolean {
+        return viewModel.isNickNameValid.value == true &&
+            viewModel.isIdValid.value == true &&
+            viewModel.isPwValid.value == true &&
+            viewModel.isMbtiValid.value == true
     }
 
     private fun navigateToLogin() {
