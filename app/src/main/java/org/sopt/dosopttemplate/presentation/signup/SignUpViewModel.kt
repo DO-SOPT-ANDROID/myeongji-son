@@ -2,6 +2,7 @@ package org.sopt.dosopttemplate.presentation.signup
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.util.regex.Pattern
 
 class SignUpViewModel : ViewModel() {
 
@@ -31,21 +32,24 @@ class SignUpViewModel : ViewModel() {
     }
 
     fun validateIdField() {
-        isIdValid.value = id.value?.matches(ID_PATTERN.toRegex())
+        isIdValid.value = id.value?.let { ID_REGEX.matcher(it).matches() } ?: false
     }
 
     fun validatePwField() {
-        isPwValid.value = pw.value?.matches(PW_PATTERN.toRegex())
+        isPwValid.value = pw.value?.let { PW_REGEX.matcher(it).matches() } ?: false
     }
 
     fun validateMBTIField() {
-        isMbtiValid.value = mbti.value?.matches(MBTI_PATTERN.toRegex())
+        isMbtiValid.value = mbti.value?.let { MBTI_REGEX.matcher(it).matches() } ?: false
     }
 
     companion object {
-        const val ID_PATTERN = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,10}$"
-        const val PW_PATTERN =
+        private const val ID_PATTERN = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,10}$"
+        val ID_REGEX: Pattern = Pattern.compile(ID_PATTERN)
+        private const val PW_PATTERN =
             "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[\$@\$!%*#?&])[A-Za-z\\d\$@\$!%*#?&]{6,12}\$"
-        const val MBTI_PATTERN = "^[a-zA-Z]{4}\$"
+        val PW_REGEX: Pattern = Pattern.compile(PW_PATTERN)
+        private const val MBTI_PATTERN = "^[a-zA-Z]{4}\$"
+        val MBTI_REGEX: Pattern = Pattern.compile(MBTI_PATTERN)
     }
 }
