@@ -4,14 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
 import org.sopt.dosopttemplate.presentation.HomeActivity
 import org.sopt.dosopttemplate.presentation.signup.SignUpActivity
-import org.sopt.dosopttemplate.util.showToastLong
 import org.sopt.dosopttemplate.util.showToastShort
 
 class LoginActivity : AppCompatActivity() {
@@ -62,12 +61,22 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observeLoginResult() {
-        loginViewModel.loginSuccess.observe(this) {
-            if (it) {
-                showToastLong(getString(R.string.success_login))
-                startMainActivity()
-            } else {
-                showToastShort("로그인 실패")
+        lifecycleScope.launch {
+            loginViewModel.loginState.collect { loginState ->
+                when (loginState) {
+                    is LoginState.Success -> {
+                        showToastShort("로그인 성공")
+                        startMainActivity()
+                    }
+
+                    is LoginState.Error -> {
+                        showToastShort("로그인 실패")
+                    }
+
+                    is LoginState.Loading -> {
+                        showToastShort("로그인 중")
+                    }
+                }
             }
         }
     }
